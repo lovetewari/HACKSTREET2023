@@ -2,69 +2,160 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amount of calorie  Machine</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="Akib Photo.ico" />
+    <!-- Three Js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js" integrity="sha512-yNJzAsg5JyP91u+sLHlUDULMBd3hmEiVkYeeN1cQBKaLZ7EyT6oH2u5THNIRM2Fu6VKcZJv+F/QAp1h/qzy9Ow==" crossorigin="anonymous"></script>
+    <!-- GLTFLoader.js -->
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <title>TS</title>
 </head>
-
 <body>
-    <section id="bmr" class="my-4">
-        <div class="container bg-primary text-light font-weight-bolder p-5">
-            <h3 class="text-center">Awesome AMR Calculator Machine</h3>
-            <form action="">
-                <div class="form-group">
-                    <label for="BMRweight" class="py-1">Weight</label>
-                    <input type="number" placeholder="Enter Your Weight (in kg)" class="form-control my-2" name="BMRweight" id="BMRweight" required>
-                </div>
-                <div class="form-group">
-                    <label for="BMRheight" class="py-1">Height</label>
-                    <input type="number" placeholder="Enter Your Height (in centimeter)" class="form-control my-2" name="BMRheight" id="BMRheight" required>
-                    <select name="BMRheightValue" id="BMRheightValue" class="form-control" onchange="BMRheightValueFunc()">
-                                        <option value="inch">Inch</option>
-                                        <option value="cm" selected>Cm</option>
-                                        <option value="meter">Meter</option>
-                                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="BMRage" class="py-1">Age</label>
-                    <input type="number" placeholder="Enter Your Age (in Year)" class="form-control my-2" name="BMRage" id="BMRage" required>
-                </div>
-                <div class="form-group">
-                    <label for="BMRgender" class="py-1">Choose Gender</label>
-                    <select name="BMRgenderValue" id="BMRgenderValue" class="form-control">
-                                        <option value="female">Female</option>
-                                        <option value="male" selected>Male</option>
-                                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="BMRamr" class="py1">Chose the type of person you are</label>
-                    <select name="BMRamr" id="BMRamr" class="form-control">
-                        <option value="Sedentary">Sedantary (little to no excercise)</option>
-                        <option value="Lightlyactive">Lightly active (1-2 times per week excercise</option>
-                        <option value="ModeratelyActive">Moderately Active (3-5 times per week excercise)</option>
-                        <option value="Actively">Actively (6-7 times per week excercise)</option>
-                        <option value="Veryactive">Very Active (6-7 times per week high excercise)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label name="Disease" class="py1">Chose the disease you have</label>
-                    <select name="BMRdisease" id="BMRdisease" class="form-control">
-                        <option value="Diabetiestype2">Diabeties type 1</option>
-                        <option value="Diabetiestype1">Diabeties type 2</option>
-                        <option value="LowCholestrol">Low Cholestrol</option>
-                        <option value="HighCholestrol">High Cholestrol</option>
-                    </select>
-                </div>
-                <button type="button" onclick="BMRcalc()" class="mt-4 btn btn-secondary btn-lg">Count my AMR</button>
-                <button type="reset" class="mt-4 btn btn-secondary btn-lg ml-auto">Reset All Data</button>
-            </form>
-        </div>
-    </section>
-    <script src="script.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <div class="main">
+        <section id="bmr" class="my-4">
+            <div class="container bg-primary text-light font-weight-bolder p-5">
+                <h3 class="text-center">Diet Planning System</h3>
+                    <form action="/predict" method="post">
+                    <div class="form-group">
+                        <label for="BMRweight" class="py-1">Weight</label>
+                        <input type="number" placeholder="Enter Your Weight (in kg)" class="form-control my-2" name="BMRweight" id="BMRweight" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="BMRheight" class="py-1">Height</label>
+                        <input type="number" placeholder="Enter Your Height (in centimeter)" class="form-control my-2" name="BMRheight" id="BMRheight" required>
+                        <select name="BMRheightValue" id="BMRheightValue" class="form-control" onchange="BMRheightValueFunc()">
+                                            <option value="inch">Inch</option>
+                                            <option value="cm" selected>Cm</option>
+                                            <option value="meter">Meter</option>
+                                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="BMRage" class="py-1">Age</label>
+                        <input type="number" placeholder="Enter Your Age (in Year)" class="form-control my-2" name="BMRage" id="BMRage" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="BMRgender" class="py-1">Choose Gender</label>
+                        <select name="BMRgenderValue" id="BMRgenderValue" class="form-control">
+                                            <option value="female">Female</option>
+                                            <option value="male" selected>Male</option>
+                                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="BMRamr" class="py1">Chose the type of person you are</label>
+                        <select name="BMRamr" id="BMRamr" class="form-control">
+                            <option value="Sedentary">Sedantary (little to no excercise)</option>
+                            <option value="Lightlyactive">Lightly active (1-2 times per week excercise</option>
+                            <option value="ModeratelyActive">Moderately Active (3-5 times per week excercise)</option>
+                            <option value="Actively">Actively (6-7 times per week excercise)</option>
+                            <option value="Veryactive">Very Active (6-7 times per week high excercise)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label name="Disease" class="py1">Chose the disease you have</label>
+                        <select name="BMRdisease" id="BMRdisease" class="form-control">
+                            <option value="Diabetiestype2">Diabeties type 1</option>
+                            <option value="Diabetiestype1">Diabeties type 2</option>
+                            <option value="LowCholestrol">Low Cholestrol</option>
+                            <option value="HighCholestrol">High Cholestrol</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="BMRcalc()" class="mt-4 btn btn-secondary btn-lg">Calculate the diet Plan</button>
+                    <button type="reset" class="mt-4 btn btn-secondary btn-lg ml-auto">Reset All Data</button>
+                </form>
+            </div>
+        </section>
+        <script src="./script.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </div>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        .main {
+            position: absolute;
+            left: 50%;
+            top: 30%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-family: sans-serif;
+            font-weight: 900;
+            font-size: 15px;
+        }
+
+    </style>
+
+    <script>
+
+        let scene;
+        let camera;
+        let renderer;
+        let starGeometry;
+        let stars;
+
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(60,window.innerWidth / window.innerHeight,1,1000);
+        camera.position.z = 10;
+        camera.position.x = Math.PI/2;
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        starGeometry = new THREE.Geometry();
+        for(let i = 0; i < 6000; i++) {
+            star = new THREE.Vector3(
+                Math.random() * 600 - 300,
+                Math.random() * 600 - 300,
+                Math.random() * 600- 300
+            );
+            star.velocity = 0;
+            star.acceleration = 0.02;
+            starGeometry.vertices.push(star);
+        }
+
+        let sprite = new THREE.TextureLoader().load('images/star.png');
+        let starMaterial = new THREE.PointsMaterial({
+            color: 0xaaaaaa,
+            size: 0.7,
+            map: sprite
+        });
+
+        stars = new THREE.Points(starGeometry,starMaterial);
+        scene.add(stars);
+
+        animate();
+
+        function animate() {
+
+            starGeometry.vertices.forEach(p=>{
+                p.velocity += p.acceleration;
+                p.y -= p.velocity;
+                if( p.y < -200) {
+                    p.y = 200;
+                    p.velocity = 0
+                }
+            });
+            starGeometry.verticesNeedUpdate = true;
+            stars.rotation.y += 0.002;
+            stars.rotation.x = -1.5;
+            renderer.render(scene,camera);
+            requestAnimationFrame(animate);
+        }
+
+
+    </script>
 </body>
 </html>
