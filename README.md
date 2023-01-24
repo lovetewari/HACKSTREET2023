@@ -1,2 +1,0 @@
-# HACKSTREET2023
-Team Silence
