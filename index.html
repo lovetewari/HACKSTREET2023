@@ -10,12 +10,44 @@
     <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <title>TS</title>
 </head>
 <body>
 
-    <div class="main"></div>
+    <div class="main">
+        <form>
+            <input id="input-1" type="number" min="1" max="100" placeholder="Age" required autofocus />
+            <label for="input-1">
+                <span class="label-text">Your Current Age</span>
+                <span class="nav-dot"></span>
+                <div class="signup-button-trigger">Welcome</div>
+            </label>
+
+            <input id="input-2" type="number" min="1" max="635" placeholder="Weight In kg" required />
+            <label for="input-2">
+                <span class="label-text">Weight</span>
+                <span class="nav-dot"></span>
+            </label>
+
+            <input id="input-3" type="number" min="1" max="300" placeholder="Height In cm" required />
+            <label for="input-3">
+                <span class="label-text">Height</span>
+                <span class="nav-dot"></span>
+            </label>
+
+            <input id="input-4" type="text" placeholder="Male or Female" required />
+            <label for="input-4">
+                <span class="label-text">Gender</span>
+                <span class="nav-dot"></span>
+            </label>
+
+            <button type="submit">Submit</button>
+            <p class="tip">Press Tab</p>
+            <div class="signup-button">Welcome</div>
+        </form>
+    </div>
 
     <script>
         let scene;
@@ -34,7 +66,7 @@
         document.body.appendChild(renderer.domElement);
 
         starGeometry = new THREE.Geometry();
-        for(let i=0;i<6000;i++) {
+        for(let i=0;i<6000;i++){
             star = new THREE.Vector3(
                 Math.random() * 600 - 300,
                 Math.random() * 600 - 300,
@@ -57,12 +89,11 @@
 
         animate();
 
-        function animate() {
-
+        function animate(){
             starGeometry.vertices.forEach(p=>{
                 p.velocity += p.acceleration;
                 p.y -= p.velocity;
-                if( p.y < -200) {
+                if(p.y<-200){
                     p.y = 200;
                     p.velocity = 0
                 }
@@ -73,7 +104,6 @@
             renderer.render(scene,camera);
             requestAnimationFrame(animate);
         }
-
 
     </script>
 </body>
