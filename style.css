@@ -13,13 +13,12 @@ body{
 }
 
 .main{
-    background-color: rgb(255, 255, 255);
     opacity:0.79;
     width: 90%;
     height:30%;
-    position: absolute;
+    position: fixed;
     left: 50%;
-    top: 30%;
+    top: 50%;
     transform: translate(-50%, -50%);
     color: #fff;
     font-family: sans-serif;
@@ -55,7 +54,6 @@ input, button {
 input {
     padding: 0.25rem 0;
     border: 0;
-    border-bottom: 8px solid #bb1515;
     outline: 0;
     background: transparent;
     color: #fff;
@@ -202,7 +200,7 @@ input:focus + label .nav-dot:before {
     height: 0.625rem;
     margin-top: -0.125rem;
     margin-left: -0.125rem;
-    background-color: #a41212;
+    background-color: #000000;
 }
 
 label[for="input-1"] .nav-dot {
@@ -219,4 +217,24 @@ label[for="input-3"] .nav-dot {
 
 label[for="input-4"] .nav-dot {
     margin-top: -50px;
+}
+
+.navbar{
+    background-color: black;
+}
+
+.navbar li{
+    float:left;
+    list-style: none; 
+    margin: 13px 20px;
+}
+
+.navbar ul{
+    overflow: auto;
+}
+
+.navbar li a{
+    padding: 3px 3px;
+    text-decoration: none;
+    color: white;
 }

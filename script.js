@@ -2,7 +2,7 @@ var BMRgivenHeight = document.getElementById("BMRheight");
 var BMRmainWeight = document.getElementById("BMRweight");
 var BMRmainAge = document.getElementById("BMRage");
 
-function BMRheightValueFunc() {
+function BMRheightValueFunc(){
     if (BMRheightValue.value == "inch") {
         BMRgivenHeight.setAttribute("placeholder", "Enter Your Height (in inch)");
     } else if (BMRheightValue.value == "cm") {
@@ -11,7 +11,7 @@ function BMRheightValueFunc() {
         BMRgivenHeight.setAttribute("placeholder", "Enter Your Height (in meter)");
     }
 }
-function BMRcalc() {
+function BMRcalc(){
     var BMRmainHeight;
     if (BMRheightValue.value == "inch"){
         BMRmainHeight = BMRgivenHeight.value * 2.54;
@@ -55,4 +55,4 @@ function BMRcalc() {
         BMRres = BMRresInt.toFixed(3);
         var all = `<h5>Your BMR is ${BMRres}</h5>`;
         document.getElementById("BMRres").innerHTML = all;
-    }
+}
