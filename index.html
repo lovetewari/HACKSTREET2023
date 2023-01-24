@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Three Js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js" integrity="sha512-yNJzAsg5JyP91u+sLHlUDULMBd3hmEiVkYeeN1cQBKaLZ7EyT6oH2u5THNIRM2Fu6VKcZJv+F/QAp1h/qzy9Ow==" crossorigin="anonymous"></script>
-    <!-- GLTFLoader.js -->
     <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
@@ -16,15 +13,28 @@
 </head>
 <body>
 
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="./ask.html">Ask</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="https://www.bajajfinserv.in/reach-us">Contact us</a></li>
+                <div class="search">
+                    <input type="text" name="search" id="search" placeholder="Search this website">
+                </div>
+            </ul>
+        </nav>
+    </header>
+
     <div class="main">
-        <form>
-            <input id="input-1" type="number" min="1" max="100" placeholder="Age" required autofocus />
+        <form method="post" action="./main.py">
+            <input id="age" type="number" min="1" max="100" placeholder="Age" required autofocus />
             <label for="input-1">
                 <span class="label-text">Your Current Age</span>
                 <span class="nav-dot"></span>
                 <div class="signup-button-trigger">Welcome</div>
             </label>
-
             <input id="input-2" type="number" min="1" max="635" placeholder="Weight In kg" required />
             <label for="input-2">
                 <span class="label-text">Weight</span>
@@ -40,6 +50,12 @@
             <input id="input-4" type="text" placeholder="Male or Female" required />
             <label for="input-4">
                 <span class="label-text">Gender</span>
+                <span class="nav-dot"></span>
+            </label>
+
+            <input id="input-5" type="text" placeholder="Diabeties(high/low) or Dyslipidemia(high/low)" required />
+            <label for="input-5">
+                <span class="label-text">Disease</span>
                 <span class="nav-dot"></span>
             </label>
 
@@ -68,9 +84,9 @@
         starGeometry = new THREE.Geometry();
         for(let i=0;i<6000;i++){
             star = new THREE.Vector3(
-                Math.random() * 600 - 300,
-                Math.random() * 600 - 300,
-                Math.random() * 600- 300
+                Math.random() * 700 - 300,
+                Math.random() * 700 - 300,
+                Math.random() * 700- 300
             );
             star.velocity = 0;
             star.acceleration = 0.00004;
@@ -80,7 +96,7 @@
         let sprite = new THREE.TextureLoader().load('images/star.png');
         let starMaterial = new THREE.PointsMaterial({
             color: 0xaaaaaa,
-            size: 0.7,
+            size: 0.8,
             map: sprite
         });
 
