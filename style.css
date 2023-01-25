@@ -219,6 +219,10 @@ label[for="input-4"] .nav-dot {
     margin-top: -50px;
 }
 
+label[for="input-5"] .nav-dot {
+    margin-top: -50px;
+}
+
 .navbar{
     background-color: black;
 }

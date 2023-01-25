@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+    <title></title>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js" integrity="sha512-yNJzAsg5JyP91u+sLHlUDULMBd3hmEiVkYeeN1cQBKaLZ7EyT6oH2u5THNIRM2Fu6VKcZJv+F/QAp1h/qzy9Ow==" crossorigin="anonymous"></script>
-    <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style.css">
-    <title>TS</title>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
 
     <header>
         <nav class="navbar">
@@ -20,69 +14,85 @@
                 <li><a href="#">Ask</a></li>
                 <li><a href="./about.html">About</a></li>
                 <li><a href="https://www.bajajfinserv.in/reach-us">Contact us</a></li>
-                <div class="search">
-                    <input type="text" name="search" id="search" placeholder="Search this website">
-                </div>
             </ul>
         </nav>
     </header>
 
+    <form>
+        <label for="query">Search:</label>
+        <input type="text" id="query" name="query">
+        <button type="submit" id="search-button">Search</button>
+    </form>
+
+
+    <style>
+      .navbar{
+        background-color: black;
+      }
+
+      .navbar li{
+          float:left;
+          list-style: none; 
+          margin: 13px 20px;
+      }
+
+      .navbar ul{
+          overflow: auto;
+      }
+
+      .navbar li a{
+          padding: 3px 3px;
+          text-decoration: none;
+          color: white;
+      }
+    </style>
+
     <script>
-        let scene;
-        let camera;
-        let renderer;
-        let starGeometry;
-        let stars;
-
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(60,window.innerWidth / window.innerHeight,1,1000);
-        camera.position.z = 10;
-        camera.position.x = Math.PI/2;
-
-        renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-
-        starGeometry = new THREE.Geometry();
-        for(let i=0;i<6000;i++){
-            star = new THREE.Vector3(
-                Math.random() * 700 - 300,
-                Math.random() * 700 - 300,
-                Math.random() * 700- 300
-            );
-            star.velocity = 0;
-            star.acceleration = 0.00004;
-            starGeometry.vertices.push(star);
-        }
-
-        let sprite = new THREE.TextureLoader().load('images/star.png');
-        let starMaterial = new THREE.PointsMaterial({
-            color: 0xaaaaaa,
-            size: 0.8,
-            map: sprite
-        });
-
-        stars = new THREE.Points(starGeometry,starMaterial);
-        scene.add(stars);
-
-        animate();
-
-        function animate(){
-            starGeometry.vertices.forEach(p=>{
-                p.velocity += p.acceleration;
-                p.y -= p.velocity;
-                if(p.y<-200){
-                    p.y = 200;
-                    p.velocity = 0
-                }
-            });
-            starGeometry.verticesNeedUpdate = true;
-            stars.rotation.y += 0.0002;
-            stars.rotation.x = -0.5;
-            renderer.render(scene,camera);
-            requestAnimationFrame(animate);
-        }
-
+      const searchButton = document.getElementById("search-button");
+        searchButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        const query = document.getElementById("query").value;
+        //make API call using the query
+        const apiKey = "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";
+        const endpoint = "https://api.openai.com/v1/engines/davinci-codex/completions";
+        const data = {
+          prompt: query,
+          max_tokens: 2048,
+          stop: "."
+        };
+      
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}`
+          },
+          body: JSON.stringify(data)
+        };
+      
+        fetch(endpoint, options)
+          .then(response => response.json())
+          .then(data => {
+            //handle the response from the API
+            fetch(endpoint, options)
+          .then(response => response.json())
+          .then(data => {
+            // Extract the generated text from the API response
+            const generatedText = data.choices[0].text;
+            // Select the element on the page where you want to display the results
+            const resultsContainer = document.getElementById("results-container");
+            // Update the text content of the element with the generated text
+            resultsContainer.textContent = generatedText;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      });
     </script>
-</body>
+
+  </body>
 </html>
