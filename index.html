@@ -101,22 +101,31 @@
 
         animate();
 
-        function animate(){
-            starGeometry.vertices.forEach(p=>{
-                p.velocity += p.acceleration;
-                p.y -= p.velocity;
-                if(p.y<-200){
-                    p.y = 200;
-                    p.velocity = 0
-                }
-            });
-            starGeometry.verticesNeedUpdate = true;
-            stars.rotation.y += 0.0002;
-            stars.rotation.x = -0.5;
-            renderer.render(scene,camera);
-            requestAnimationFrame(animate);
-        }
+function animate() {
+    // Loop through each star in the star field
+    starGeometry.vertices.forEach(p => {
+        // Update the velocity and position of each star for dynamic movement
+        p.velocity += p.acceleration;
+        p.y -= p.velocity;
 
+        // If a star goes beyond the lower boundary, reset it to the top
+        if (p.y < -200) {
+            p.y = 200;
+            p.velocity = 0;
+        }
+    });
+
+    // Mark the geometry as needing an update to reflect changes in star positions
+    starGeometry.verticesNeedUpdate = true;
+
+    // Apply a slow rotation to the entire star field for a 3D effect
+    stars.rotation.y += 0.0002;
+    stars.rotation.x = -0.5;
+
+    // Render the scene and schedule the next frame of the animation
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+}
     </script>
 </body>
 </html>
